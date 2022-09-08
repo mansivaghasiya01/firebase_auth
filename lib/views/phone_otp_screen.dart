@@ -36,60 +36,68 @@ class _OTPScreenState extends State<OTPScreen> {
       appBar: AppBar(
         title: const Text('OTP Verification'),
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 40),
-            child: Center(
-              child: Text(
-                'Verify +91-${widget.phone}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23,
-                ),
+      body: otpscreenWidget(),
+    );
+  }
+
+  //---------------------------helper widget---------------------------------//
+
+  Widget otpscreenWidget() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 40),
+          child: Center(
+            child: Text(
+              'Verify +91-${widget.phone}',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 23,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Pinput(
-              length: 6,
-              defaultPinTheme: defaultPinTheme,
-              controller: pinPutController,
-              pinAnimationType: PinAnimationType.fade,
-              onSubmitted: (pin) async {
-                try {
-                  await FirebaseAuth.instance
-                      .signInWithCredential(PhoneAuthProvider.credential(
-                          verificationId: _verificationCode!, smsCode: pin))
-                      .then(
-                    (value) async {
-                      if (value.user != null) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PhoneAuthHomeScreen(),
-                            ),
-                            (route) => false);
-                      }
-                    },
-                  );
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        e.toString(),
-                      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Pinput(
+            length: 6,
+            defaultPinTheme: defaultPinTheme,
+            controller: pinPutController,
+            pinAnimationType: PinAnimationType.fade,
+            onSubmitted: (pin) async {
+              try {
+                await FirebaseAuth.instance
+                    .signInWithCredential(PhoneAuthProvider.credential(
+                        verificationId: _verificationCode!, smsCode: pin))
+                    .then(
+                  (value) async {
+                    if (value.user != null) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PhoneAuthHomeScreen(),
+                          ),
+                          (route) => false);
+                    }
+                  },
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      e.toString(),
                     ),
-                  );
-                }
-              },
-            ),
-          )
-        ],
-      ),
+                  ),
+                );
+              }
+            },
+          ),
+        )
+      ],
     );
   }
+
+  //------------------------OTP ------------------------------------
 
   _verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
