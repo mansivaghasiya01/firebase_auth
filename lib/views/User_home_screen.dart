@@ -25,61 +25,50 @@ class _UserHomePageState extends State<UserHomePage> {
       appBar: AppBar(
         title: const Text("Home Page"),
       ),
-      body: buildwidget(),
-    );
-  }
-
-  Widget buildwidget() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              user.email!,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                user.email!,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                const Text(
-                  " UID : ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  const Text(
+                    " UID : ",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                   ),
-                ),
-                Text(
-                  user.uid,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                  Text(
+                    user.uid,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            MaterialButton(
-              onPressed: () async {
-                googleSignIn.disconnect();
-                auth.signOut();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) => const LoginClass(),
-                    ),
-                    (Route<dynamic> route) => false);
-              },
-              child: const Text("Log Out"),
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              MaterialButton(
+                onPressed: () async {
+                  googleSignIn.disconnect();
+                  auth.signOut();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginClass(),
+                      ),
+                      (Route<dynamic> route) => false);
+                },
+                child: const Text("Log Out"),
+              ),
+            ],
+          ),
         ),
       ),
     );

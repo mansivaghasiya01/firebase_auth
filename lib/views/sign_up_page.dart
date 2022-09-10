@@ -16,7 +16,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  //-------------------------------- Variable ------------------------------------
+  // --------------------------------- variable --------------------------------
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -27,8 +27,6 @@ class _SignUpPageState extends State<SignUpPage> {
   String? userEmail;
   String error = "";
   bool _passwordVisible = true;
-
-  //---------------------------------- function --------------------------------
 
   Future<void> register() async {
     final User user = (await _auth.createUserWithEmailAndPassword(
@@ -60,11 +58,11 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: buildForm(),
+      body: signUpContext(),
     );
   }
 
-  Widget buildForm() {
+  Widget signUpContext() {
     return SingleChildScrollView(
       child: Form(
         key: formKey,
@@ -210,19 +208,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               'user Already exist, please try another email address')));
                     }
                   });
-
-                  // if (formKey.currentState!.validate() &&
-                  //     myValue.isNotEmpty) {
-                  //   await register();
-
-                  //   // ignore: use_build_context_synchronouslyabcd123@gmail.com
-                  //   Navigator.of(context).pushAndRemoveUntil(
-                  //       MaterialPageRoute(
-                  //           builder: (context) => const LoginClass()),
-                  //       (Route<dynamic> route) => false);
-                  // } else if (myValue.isEmpty) {
-                  //   Fluttertoast.showToast(msg: "please select gender");
-                  // }
                 },
                 child: const Text('Submit'),
               ),

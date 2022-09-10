@@ -17,7 +17,7 @@ class _PhoneAuthHomeScreenState extends State<PhoneAuthHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PhoneAuthHomeScreen'),
+        title: const Text('Phone Auth HomeScreen'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

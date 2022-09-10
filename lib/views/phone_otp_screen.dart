@@ -36,13 +36,11 @@ class _OTPScreenState extends State<OTPScreen> {
       appBar: AppBar(
         title: const Text('OTP Verification'),
       ),
-      body: otpscreenWidget(),
+      body: phoneOtpContext(),
     );
   }
 
-  //---------------------------helper widget---------------------------------//
-
-  Widget otpscreenWidget() {
+  Widget phoneOtpContext() {
     return Column(
       children: [
         Container(
@@ -96,8 +94,6 @@ class _OTPScreenState extends State<OTPScreen> {
       ],
     );
   }
-
-  //------------------------OTP ------------------------------------
 
   _verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(

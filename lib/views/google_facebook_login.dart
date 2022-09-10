@@ -8,13 +8,16 @@ import 'package:login_logout_firbase/component/textField_component.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login_logout_firbase/views/User_home_screen.dart';
+import 'package:login_logout_firbase/views/forget_password.dart';
 import 'package:login_logout_firbase/views/sign_up_page.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final googleSignIn = GoogleSignIn();
 
 class LoginClass extends StatefulWidget {
-  const LoginClass({Key? key}) : super(key: key);
+  const LoginClass({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<LoginClass> createState() => _LoginClassState();
@@ -132,6 +135,10 @@ class _LoginClassState extends State<LoginClass> {
                   },
                 ),
               ),
+              const SizedBox(
+                height: 5,
+              ),
+              forgetPassword(),
               const SizedBox(
                 height: 30,
               ),
@@ -408,5 +415,33 @@ class _LoginClassState extends State<LoginClass> {
         isLoading = false;
       });
     }
+  }
+
+  //--------------------------------- forget password -----------------------------------
+
+  Widget forgetPassword() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ResetPassword(),
+                ),
+              );
+            },
+            // ignore: prefer_const_constructors
+            child: Text(
+              "Forget Password?",
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

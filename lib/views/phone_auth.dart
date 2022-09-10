@@ -11,18 +11,18 @@ class PhoneAuthScreen extends StatefulWidget {
 }
 
 class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Phone Auth'),
       ),
-      body: phoneauth(),
+      body: columnWidget(),
     );
   }
 
-  Widget phoneauth() {
+  Widget columnWidget() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -48,7 +48,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
               ),
               maxLength: 10,
               keyboardType: TextInputType.number,
-              controller: _controller,
+              controller: mobileController,
             ),
           )
         ]),
@@ -59,7 +59,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => OTPScreen(_controller.text),
+                  builder: (context) => OTPScreen(mobileController.text),
                 ),
               );
             },
